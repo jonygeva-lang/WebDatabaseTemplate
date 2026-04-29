@@ -13,7 +13,6 @@ body {
   height: 160px;
   background-size: cover;
   background-position: center;
-  transform: translate(x, y);
 }
 
 .authDiv {

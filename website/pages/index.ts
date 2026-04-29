@@ -6,8 +6,8 @@ var itemInput = document.querySelector<HTMLInputElement>("#itemInput")!;
 var amountInput = document.querySelector<HTMLInputElement>("#amountInput")!;
 var addButton = document.querySelector<HTMLButtonElement>("#addButton")!;
 var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;
-var cards = document.querySelector<HTMLUListElement>("#cards")!;
-
+var cards = document.querySelectorAll<HTMLImageElement>(".cards");
+``
 
 var items = await send<Item[]>("getItems");
 
@@ -22,4 +22,3 @@ addButton.onclick = async function() {
   location.reload();
 };
 
-cards.add
