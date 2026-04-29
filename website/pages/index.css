@@ -9,10 +9,11 @@ body {
   background-position: center;
 }
 .cards {
-    width: 30px;
-  height: 20px;
+    width: 120px;
+  height: 160px;
   background-size: cover;
   background-position: center;
+  transform: translate(x, y);
 }
 
 .authDiv {
