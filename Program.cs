@@ -58,3 +58,10 @@ class Item(string name, double amount)
   public string Name { get; set; } = name;
   public double Amount { get; set; } = amount;
 }
+
+class Card(string imageUrl)
+{
+  public int Id { get; set; } = default!;
+
+  public string ImageUrl { get; set; } = imageUrl;
+}

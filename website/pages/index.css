@@ -3,16 +3,17 @@
   flex-direction: row;
   justify-content: center;
 }
+
 body {
   background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
   background-size: cover;
   background-position: center;
 }
+
 .cards {
-    width: 120px;
+  width: 120px;
   height: 160px;
-  background-size: cover;
-  background-position: center;
+  transition: transform 0.2s ease;
 }
 
 .authDiv {
@@ -20,8 +21,42 @@ body {
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.free-cells, .foundations {
+  display: flex;
+  gap: 10px;
+}
+
+.tableau {
+  display: flex;
+  gap: 10px;
+}
+
+.column {
+  width: 120px;
+  min-height: 300px;
+}
+
+.slot {
+  width: 120px;
+  height: 160px;
+  border: 2px dashed #aaa;
+}
+
+.card {
+  width: 120px;
+  margin-top: -90px; /* stack effect */
+}
+
+.column .card:first-child {
+  margin-top: 0;
 }
