@@ -1,0 +1,23 @@
+body {
+  background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
+  background-size: cover;
+  background-position: center;
+}
+
+.head-title {
+  color: rgb(255, 255, 255);
+  font-size: 50px;
+}
+.semi-titles {   
+  color: rgb(204, 198, 196);
+  font-size: 35px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.info{
+  color: rgb(0, 0, 0);
+  font-size: 30px
+}
+.red{
+      color: rgb(255, 0, 0);
+}
