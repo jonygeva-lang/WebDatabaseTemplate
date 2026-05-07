@@ -9,22 +9,45 @@ body {
   background-size: cover;
   background-position: center;
 }
+.head-title{
+  font-size: 48px;
+  font-weight: bold;
+  animation: colorChange 9s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: red;
+  }
+  33% {
+    color: black;
+  }
+  66% {
+    color: white;
+  }
+  100% {
+    color: red;
+  }
+}
 .playbutton {
-    background-color: #030303;   /* green */
-  color: white;
+    background-color: #114b006c;   /* green */
+  color: rgb(0, 0, 0);
   font-size: 24px;
   font-family: Helvetica;
-  padding: 12px 24px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
+  margin: 10px;
 }
 .top-row {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
+.rankbutton{
 
+}
 .free-cells, .foundations {
   display: flex;
   gap: 10px;
@@ -36,25 +59,28 @@ body {
 }
 
 .column {
-  width: 120px;
+  width: 130px;
   min-height: 300px;
 }
 
 .slot {
-  width: 120px;
-  height: 160px;
+  width: 130px;
+  height: 180px;
   border: 2px dashed #aaa;
-  position: relative;
+  /* position: relative; */
 }
 
 .card {
   display: block;
-  width: 120px;
-  /* margin-top: -90px; */
+  width: 130px;
+  height: 180px;
+  margin-top: 0;
   transition: all 1s ease-in-out;
-  position: fixed;
+  transform: translateY()
 }
-
+.column .card {
+  margin-top: -160px;
+}
 .column .card:first-child {
   margin-top: 0;
 }

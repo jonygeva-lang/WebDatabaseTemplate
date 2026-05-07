@@ -137,11 +137,14 @@ var tableauColumns: HTMLDivElement[] = [];
 
 // 4 free cells
 for (let i = 0; i < 4; i++) {
-  var slot = create("div", { className: "slot freecell", onclick: function (){
+  let slot = create("div", { className: "slot freecell", onclick: function (){
     if (selctedCard == null)
     {
       return
     }
+
+    selctedCard.style.marginTop = "0px";
+    selctedCard.style.transform = "translateY(0px)";
 
     slot.append(selctedCard);
   } });
@@ -151,11 +154,14 @@ for (let i = 0; i < 4; i++) {
 
 // 4 foundations
 for (let i = 0; i < 4; i++) {
-  var slot = create("div", { className: "slot foundation",  onclick: function (){
+  var slot = create("div", { className: "slot foundation", onclick: function (){
     if (selctedCard == null)
     {
       return
     }
+
+    selctedCard.style.marginTop = "0px";
+    selctedCard.style.transform = "translateY(0px)";
 
     slot.append(selctedCard);
   } });
@@ -192,7 +198,7 @@ for (let i = 0; i < indices.length; i++) {
     }
   });
 
-  cardImg.style.transform = `translateY(${(Math.floor(i / 8))*40}px)`;
+  cardImg.style.transform = `translateY(${(Math.floor(i / 8))*60}px)`;
 
   var column = tableauColumns[i % 8];
   column.append(cardImg);
