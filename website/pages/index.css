@@ -40,14 +40,11 @@ body {
   cursor: pointer;
   margin: 10px;
 }
-.top-row {
+.top-row{
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
 }
-.rankbutton{
 
-}
 .free-cells, .foundations {
   display: flex;
   gap: 10px;
@@ -76,7 +73,6 @@ body {
   height: 180px;
   margin-top: 0;
   transition: all 1s ease-in-out;
-  transform: translateY()
 }
 .column .card {
   margin-top: -160px;

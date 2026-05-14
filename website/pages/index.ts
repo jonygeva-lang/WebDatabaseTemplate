@@ -19,7 +19,6 @@ var tableau = create("div", { className: "tableau" });
 gameDiv.append(topRow, tableau);
 topRow.append(freeCells, foundations);
 
-
 var cardIds = [
   "ace_hearts",
   "2_hearts",
@@ -154,7 +153,7 @@ for (let i = 0; i < 4; i++) {
 
 // 4 foundations
 for (let i = 0; i < 4; i++) {
-  var slot = create("div", { className: "slot foundation", onclick: function (){
+  let slot = create("div", { className: "slot foundation", onclick: function (){
     if (selctedCard == null)
     {
       return
@@ -164,11 +163,19 @@ for (let i = 0; i < 4; i++) {
     selctedCard.style.transform = "translateY(0px)";
 
     slot.append(selctedCard);
+    var LastChild = slot
   } });
   foundations.append(slot);
   foundationSlots.push(slot);
 }
+function RankSuit() {
 
+  var arrparts = selctedCard.id.split("_")
+  var rank = arrparts[0];
+  var
+
+
+}
 // 8 tableau columns
 for (let i = 0; i < 8; i++) {
   var col = create("div", { className: "column" });
