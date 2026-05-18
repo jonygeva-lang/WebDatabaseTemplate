@@ -21,14 +21,14 @@ var tableau = create("div", { className: "tableau" });
 gameDiv.append(topRow, tableau);
 topRow.append(freeCells, foundations);
 
-function getnum(Id: string) {
-  var arr = Id.split("-")
-  console.log
-  return arr[0]
+function getNum(Id: string) {
+  var arr = Id.split("_");
+  console.log(arr[0]);
+  return arr[0];
 }
 function getType(Id: string) {
-  var arr = Id.split("-")
-  arr[1]
+  var arr = Id.split("_");
+  return arr[1];
 }
 
 var cardIds = [
@@ -166,17 +166,15 @@ for (let i = 0; i < 4; i++) {
 // 4 foundations
 for (let i = 0; i < 4; i++) {
   let slot = create("div", { className: "slot foundation", onclick: function (){
-    if (selctedCard == null)
+    if (selctedCard == null || getNum(selctedCard.id) != "ace" )
     {
       return
     }
-  console.log(i + "i")
     selctedCard.style.marginTop = "0px";
     selctedCard.style.transform = "translateY(0px)";
 
     slot.append(selctedCard);
   } });
-  console.log(i)
   foundations.append(slot);
   foundationSlots.push(slot);
 }
