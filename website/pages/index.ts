@@ -9,7 +9,9 @@ var addButton = document.querySelector<HTMLButtonElement>("#addButton")!;
 var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
 var cardsDiv = get("div", "cardsDiv");
 var gameDiv = get("div", "game");
+var title = get("div", "head-title");
 
+console.log("hello")
 var topRow = create("div", { className: "top-row" });
 var freeCells = create("div", { className: "free-cells" });
 var foundations = create("div", { className: "foundations" });
@@ -19,6 +21,15 @@ var tableau = create("div", { className: "tableau" });
 gameDiv.append(topRow, tableau);
 topRow.append(freeCells, foundations);
 
+function getnum(Id: string) {
+  var arr = Id.split("-")
+  console.log
+  return arr[0]
+}
+function getType(Id: string) {
+  var arr = Id.split("-")
+  arr[1]
+}
 
 var cardIds = [
   "ace_hearts",
@@ -154,17 +165,18 @@ for (let i = 0; i < 4; i++) {
 
 // 4 foundations
 for (let i = 0; i < 4; i++) {
-  var slot = create("div", { className: "slot foundation", onclick: function (){
+  let slot = create("div", { className: "slot foundation", onclick: function (){
     if (selctedCard == null)
     {
       return
     }
-
+  console.log(i + "i")
     selctedCard.style.marginTop = "0px";
     selctedCard.style.transform = "translateY(0px)";
 
     slot.append(selctedCard);
   } });
+  console.log(i)
   foundations.append(slot);
   foundationSlots.push(slot);
 }

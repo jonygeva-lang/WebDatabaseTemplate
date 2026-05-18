@@ -9,11 +9,12 @@
       "presentation": {
         "reveal": "never",
         "focus": false,
-        "panel": "dedicated",
+        "panel": "dedicated"
       },
       "runOptions": {
         "runOn": "folderOpen"
-      }
+      },
+      "problemMatcher": []
     },
     {
       "label": "build",
