@@ -10,7 +10,6 @@
     var gameDiv = get("div", "game");
     var title = get("div", "head-title");
 
-    console.log("hello")
     var topRow = create("div", { className: "top-row" });
     var freeCells = create("div", { className: "free-cells" });
     var foundations = create("div", { className: "foundations" });
@@ -30,7 +29,7 @@
     }
 
     var cardIds = [
-      "ace_hearts",
+      "1_hearts",
       "2_hearts",
       "3_hearts",
       "4_hearts",
@@ -40,10 +39,10 @@
       "8_hearts",
       "9_hearts",
       "10_hearts",
-      "jack_hearts",
-      "queen_hearts",
-      "king_hearts",
-      "ace_diamonds",
+      "11_hearts",
+      "12_hearts",
+      "13_hearts",
+      "1_diamonds",
       "2_diamonds",
       "3_diamonds",
       "4_diamonds",
@@ -53,10 +52,10 @@
       "8_diamonds",
       "9_diamonds",
       "10_diamonds",
-      "jack_diamonds",
-      "queen_diamonds",
-      "king_diamonds",
-      "ace_clubs",
+      "11_diamonds",
+      "12_diamonds",
+      "13_diamonds",
+      "1_clubs",
       "2_clubs",
       "3_clubs",
       "4_clubs",
@@ -66,10 +65,10 @@
       "8_clubs",
       "9_clubs",
       "10_clubs",
-      "jack_clubs",
-      "queen_clubs",
-      "king_clubs",
-      "ace_spades",
+      "11_clubs",
+      "12_clubs",
+      "13_clubs",
+      "1_spades",
       "2_spades",
       "3_spades",
       "4_spades",
@@ -79,9 +78,9 @@
       "8_spades",
       "9_spades",
       "10_spades",
-      "jack_spades",
-      "queen_spades",
-      "king_spades",
+      "11_spades",
+      "12_spades",
+      "13_spades",
 
     ];
 
@@ -164,7 +163,7 @@
     // 4 foundations
     for (let i = 0; i < 4; i++) {
       let slot = create("div", { className: "slot foundation", onclick: function (){
-        if (selctedCard == null || getNum(selctedCard.id) != "ace" )
+        if (selctedCard == null || getNum(selctedCard.id) != "1" )
         {
           return
         }
@@ -172,6 +171,7 @@
         selctedCard.style.transform = "translateY(0px)";
         countclick = 0
         slot.append(selctedCard);
+        selctedCard = null
       } });
       foundations.append(slot);
       foundationSlots.push(slot);
@@ -196,14 +196,14 @@
 
     // deal into 8 columns (FreeCell style)
 
-      let CardArr1: string[] = [];
-      let CardArr2: string[] = [];
-      let CardArr3: string[] = [];
-      let CardArr4: string[] = [];
-      let CardArr5: string[] = [];
-      let CardArr6: string[] = [];
-      let CardArr7: string[] = [];
-      let CardArr8: string[] = [];
+      // let CardArr1: string[] = [];
+      // let CardArr2: string[] = [];
+      // let CardArr3: string[] = [];
+      // let CardArr4: string[] = [];
+      // let CardArr5: string[] = [];
+      // let CardArr6: string[] = [];
+      // let CardArr7: string[] = [];
+      // let CardArr8: string[] = [];
 
     var countclick = 0
     for (let i = 0; i < indices.length; i++) {
@@ -217,16 +217,21 @@
           if (countclick === 0){
             selctedCard = cardImg;
             countclick = 1
-          }
+          } 
           else if (countclick === 1){
-          if (selctedCard == null)
+          if (selctedCard == null || column.lastElementChild === cardImg)
             {
               return
             }
-          let targetColumnIndex = parseInt(cardImg.dataset['place']);
-          let column = tableauColumns[targetColumnIndex];
-          column.append(selctedCard);
+          if (parseInt(getNum(selctedCard.id)) +1 === parseInt(getNum(cardImg.id)) && (selctedCard.parentElement as HTMLDivElement).children.length-1 == Array.from((selctedCard.parentElement as HTMLDivElement).children).indexOf(selctedCard) && cardImg == cardImg.parentElement!.lastElementChild)
+            {
+              let column = cardImg.parentElement as HTMLDivElement;
+              let LenCol = column.children.length;
+              column.append(selctedCard);
+              selctedCard.style.transform = `translateY(${(LenCol)*60}px)`
+            }
           countclick = 0
+          selctedCard = null
           }
         }
       });
@@ -235,31 +240,31 @@
 
       cardImg.style.transform = `translateY(${(Math.floor(i / 8))*60}px)`;
       var column = tableauColumns[i % 8];
-      if ((i%8) == 0) { 
-        CardArr1.push(cardImg.id)
-      }
-      else if ((i%8) == 1) {
-        CardArr2.push(cardImg.id)
-      }
-      else if ((i%8) == 2) {
-        CardArr3.push(cardImg.id)
-        console.log(CardArr3.at(-1))
-      }
-      else if ((i%8) == 3) {
-        CardArr4.push(cardImg.id)
-      }
-      else if ((i%8) == 4) {
-        CardArr5.push(cardImg.id)
-      }
-      else if ((i%8) == 5) {
-        CardArr6.push(cardImg.id)
-      }
-      else if ((i%8) == 6) {
-        CardArr7.push(cardImg.id)
-      }
-      else if ((i%8) == 7) {
-        CardArr8.push(cardImg.id)
-      }
+      // if ((i%8) == 0) { 
+      //   CardArr1.push(cardImg.id)
+      // }
+      // else if ((i%8) == 1) {
+      //   CardArr2.push(cardImg.id)
+      // }
+      // else if ((i%8) == 2) {
+      //   CardArr3.push(cardImg.id)
+      //   console.log(CardArr3.at(-1))
+      // }
+      // else if ((i%8) == 3) {
+      //   CardArr4.push(cardImg.id)
+      // }
+      // else if ((i%8) == 4) {
+      //   CardArr5.push(cardImg.id)
+      // }
+      // else if ((i%8) == 5) {
+      //   CardArr6.push(cardImg.id)
+      // }
+      // else if ((i%8) == 6) {
+      //   CardArr7.push(cardImg.id)
+      // }
+      // else if ((i%8) == 7) {
+      //   CardArr8.push(cardImg.id)
+      // }
       column.append(cardImg);
     }
     // var items = await send<Item[]>("getItems");
