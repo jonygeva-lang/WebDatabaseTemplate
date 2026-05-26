@@ -142,7 +142,6 @@
     var freeCellSlots: HTMLDivElement[] = [];
     var foundationSlots: HTMLDivElement[] = [];
     var tableauColumns: HTMLDivElement[] = [];
-
     // 4 free cells
     for (let i = 0; i < 4; i++) {
       let slot = create("div", { className: "slot freecell", onclick: function (){
@@ -150,7 +149,15 @@
         {
           return
         }
-
+        if (slot.lastElementChild != null && selctedCard.parentElement?.lastElementChild == selctedCard)
+        {
+          let column = selctedCard.parentElement as HTMLDivElement;
+          let LenCol = column.children.length;
+          column.append(slot.lastElementChild);
+          selctedCard.style.transform = `translateY(${(LenCol)*60}px)`
+          countclick = 0
+          return
+        }
         selctedCard.style.marginTop = "0px";
         selctedCard.style.transform = "translateY(0px)";
         countclick = 0
@@ -221,6 +228,7 @@
           else if (countclick === 1){
           if (selctedCard == null || column.lastElementChild === cardImg)
             {
+              selctedCard = null
               return
             }
           if (parseInt(getNum(selctedCard.id)) +1 === parseInt(getNum(cardImg.id)) && (selctedCard.parentElement as HTMLDivElement).children.length-1 == Array.from((selctedCard.parentElement as HTMLDivElement).children).indexOf(selctedCard) && cardImg == cardImg.parentElement!.lastElementChild)
@@ -230,8 +238,12 @@
               column.append(selctedCard);
               selctedCard.style.transform = `translateY(${(LenCol)*60}px)`
             }
+            // && selctedCard.parentElement 
+            console.log(selctedCard.parentElement as HTMLDivElement)
+          console.log(countclick = 0)
+          console.log(selctedCard.id)
+          console.log(cardImg.id)
           countclick = 0
-          selctedCard = null
           }
         }
       });
