@@ -27,6 +27,13 @@
       var arr = Id.split("_");
       return arr[1];
     }
+    function ColorsMatch(id_first: string, id_second: string)
+    {
+      if (getType(id_first) == "hearts" && (getType(id_second)== "clubs" || getType(id_second)== "spades" )) {return true}
+      if (getType(id_first) == "diamonds" && (getType(id_second)== "clubs" || getType(id_second)== "spades" )) {return true}
+      if (getType(id_first) == "clubs" && (getType(id_second)== "diamonds" || getType(id_second)== "hearts" )) {return true}
+      if (getType(id_first) == "spades" && (getType(id_second)== "diamonds" || getType(id_second)== "hearts" )) {return true}
+    }
 
     var cardIds = [
       "1_hearts",
@@ -145,40 +152,63 @@
     // 4 free cells
     for (let i = 0; i < 4; i++) {
       let slot = create("div", { className: "slot freecell", onclick: function (){
-        if (selctedCard == null)
+        console.log("clicked");
+        console.log((selectedCard!.parentElement?.lastElementChild == selectedCard) +"1")
+        if (selectedCard == null || selectedCard.parentElement?.lastElementChild != selectedCard)
         {
           return
         }
-        if (slot.lastElementChild != null && selctedCard.parentElement?.lastElementChild == selctedCard)
+        console.log(selectedCard.parentElement?.lastElementChild == selectedCard)
+        if (slot.lastElementChild != null && selectedCard.parentElement?.lastElementChild == selectedCard)
         {
-          let column = selctedCard.parentElement as HTMLDivElement;
-          let LenCol = column.children.length;
-          column.append(slot.lastElementChild);
-          selctedCard.style.transform = `translateY(${(LenCol)*60}px)`
-          countclick = 0
-          return
+          return;
         }
-        selctedCard.style.marginTop = "0px";
-        selctedCard.style.transform = "translateY(0px)";
+        console.log(countclick + "free 2")
         countclick = 0
-        slot.append(selctedCard);
+        slot.append(selectedCard);
       } });
       freeCells.append(slot);
       freeCellSlots.push(slot);
     }
-
+      var ArrHearts = 1
+      var ArrDiamonds = 1
+      var ArrSpade = 1
+      var ArrClubs = 1
     // 4 foundations
     for (let i = 0; i < 4; i++) {
       let slot = create("div", { className: "slot foundation", onclick: function (){
-        if (selctedCard == null || getNum(selctedCard.id) != "1" )
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "clubs" && parseInt(getNum(selectedCard.id)) == ArrClubs)
         {
-          return
+          ArrClubs += 1
+          slot.append(selectedCard);
+          countclick = 0;
+          selectedCard = null;
+          return;
         }
-        selctedCard.style.marginTop = "0px";
-        selctedCard.style.transform = "translateY(0px)";
-        countclick = 0
-        slot.append(selctedCard);
-        selctedCard = null
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "spades" && parseInt(getNum(selectedCard.id)) == ArrSpade)
+        {
+          ArrSpade += 1
+          slot.append(selectedCard);
+          countclick = 0;
+          selectedCard = null;
+          return;
+        }
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "diamonds" && parseInt(getNum(selectedCard.id)) == ArrDiamonds)
+        {
+          ArrDiamonds += 1
+          slot.append(selectedCard);
+          countclick = 0;
+          selectedCard = null;
+          return;
+        }
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild = selectedCard && getType(selectedCard?.id!) == "hearts" && parseInt(getNum(selectedCard.id)) == ArrHearts)
+        {
+          ArrHearts += 1
+          slot.append(selectedCard);
+          countclick = 0;
+          selectedCard = null;
+          return;
+        }
       } });
       foundations.append(slot);
       foundationSlots.push(slot);
@@ -199,7 +229,7 @@
 
     var indices = Array.from({ length: 52 }, (_, i) => i);
     shuffle(indices);
-    var selctedCard: HTMLImageElement | null = null;
+    var selectedCard: HTMLImageElement | null = null;
 
     // deal into 8 columns (FreeCell style)
 
@@ -221,36 +251,42 @@
         className: "card",
         id: cardIds[cardIndex],
         onclick: function () {
+          console.log("start", countclick);
           if (countclick === 0){
-            selctedCard = cardImg;
+            selectedCard = cardImg;
+            selectedCard.classList.add("selectedCard1");
+            console.log(countclick + " ?" )
             countclick = 1
           } 
           else if (countclick === 1){
-          if (selctedCard == null || column.lastElementChild === cardImg)
+          if (selectedCard == null)
             {
-              selctedCard = null
-              return
+              return;
             }
-          if (parseInt(getNum(selctedCard.id)) +1 === parseInt(getNum(cardImg.id)) && (selctedCard.parentElement as HTMLDivElement).children.length-1 == Array.from((selctedCard.parentElement as HTMLDivElement).children).indexOf(selctedCard) && cardImg == cardImg.parentElement!.lastElementChild)
+          selectedCard.classList.remove("selectedCard1");
+          if (
+            parseInt(getNum(selectedCard.id)) +1 === parseInt(getNum(cardImg.id))
+            && (selectedCard.parentElement as HTMLDivElement).children.length-1 == Array.from((selectedCard.parentElement as HTMLDivElement).children).indexOf(selectedCard)
+            && cardImg == cardImg.parentElement!.lastElementChild
+            && ColorsMatch(selectedCard.id, cardImg.id)
+          ) 
             {
               let column = cardImg.parentElement as HTMLDivElement;
-              let LenCol = column.children.length;
-              column.append(selctedCard);
-              selctedCard.style.transform = `translateY(${(LenCol)*60}px)`
+              selectedCard.classList.remove("selectedCard1");
+              column.append(selectedCard);
             }
             // && selctedCard.parentElement 
-            console.log(selctedCard.parentElement as HTMLDivElement)
           console.log(countclick = 0)
-          console.log(selctedCard.id)
+          console.log(selectedCard.id)
           console.log(cardImg.id)
           countclick = 0
           }
+          console.log("end", countclick);
         }
       });
 
       cardImg.dataset['place'] = (i % 8).toString();  
 
-      cardImg.style.transform = `translateY(${(Math.floor(i / 8))*60}px)`;
       var column = tableauColumns[i % 8];
       // if ((i%8) == 0) { 
       //   CardArr1.push(cardImg.id)

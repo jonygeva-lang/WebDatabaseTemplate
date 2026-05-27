@@ -55,7 +55,21 @@ body {
   display: flex;
   gap: 10px;
 }
+.selectedCard1 {
+  animation: highlight 1s;
+}
 
+@keyframes highlight {
+  0% {
+    outline: 3px solid gold;
+    transform: scale(1.05);
+  }
+
+  100% {
+    outline: 0px solid transparent;
+    transform: scale(1);
+  }
+}
 .column {
   width: 130px;
   min-height: 300px;
@@ -77,7 +91,7 @@ body {
   transform: translateY()
 }
 .column .card {
-  margin-top: -160px;
+  margin-top: -120px;
 }
 .column .card:first-child {
   margin-top: 0;
