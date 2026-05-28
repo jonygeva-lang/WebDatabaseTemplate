@@ -45,7 +45,9 @@ body {
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
+.foundations .card {
+  margin-top: -180px;
+}
 .free-cells, .foundations {
   display: flex;
   gap: 10px;
