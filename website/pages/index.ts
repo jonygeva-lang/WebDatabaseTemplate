@@ -153,7 +153,7 @@
     for (let i = 0; i < 4; i++) {
       let slot = create("div", { className: "slot freecell", onclick: function (){
         console.log("clicked"); 
-        if (selectedCard == null || selectedCard.parentElement?.lastElementChild != selectedCard || slot.children.length >2)
+        if (selectedCard == null || selectedCard.parentElement?.lastElementChild != selectedCard || slot.children.length >> 0)
         {
           return
         }
@@ -221,10 +221,15 @@
       foundations.append(slot);
       foundationSlots.push(slot);
     }
+    var selectedCard: HTMLImageElement | null = null;
 
     // 8 tableau columns
     for (let i = 0; i < 8; i++) {
-      let col = create("div", { className: "column" });
+      let col = create("div", { className: "column", onclick: function (){
+        if (selectedCard != null && column.children.length == 0 ){
+          column.append(selectedCard);
+        }
+      } });
       tableau.append(col);
       tableauColumns.push(col);
     }
@@ -234,13 +239,12 @@
         [array[i], array[j]] = [array[j], array[i]];
       }
     }
+  
 
     var indices = Array.from({ length: 52 }, (_, i) => i);
     shuffle(indices);
-    var selectedCard: HTMLImageElement | null = null;
 
     // deal into 8 columns (FreeCell style)
-    
     var countclick = 0
     for (let i = 0; i < indices.length; i++) {
       var cardIndex = indices[i];
@@ -263,12 +267,12 @@
               return;
             }
           selectedCard.classList.remove("selectedCard1");
-          console.log(cardImg?.parentElement?.classList.contains("freecell"))
           if (
             parseInt(getNum(selectedCard.id)) +1 === parseInt(getNum(cardImg.id))
             && (selectedCard.parentElement as HTMLDivElement).children.length-1 == Array.from((selectedCard.parentElement as HTMLDivElement).children).indexOf(selectedCard)
             && cardImg == cardImg.parentElement!.lastElementChild
             && ColorsMatch(selectedCard.id, cardImg.id)
+            &&  !cardImg.parentElement?.className.includes("freecell")
           ) 
             {
               let column = cardImg.parentElement as HTMLDivElement;
@@ -276,7 +280,6 @@
               column.append(selectedCard);
             }
             // && selctedCard.parentElement 
-          console.log(countclick = 0)
           console.log(selectedCard.id)
           console.log(cardImg.id)
           countclick = 0
@@ -284,8 +287,6 @@
           console.log("end", countclick);
         }
       });
-
-      cardImg.dataset['place'] = (i % 8).toString();  
 
       var column = tableauColumns[i % 8];
       column.append(cardImg);
