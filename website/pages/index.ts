@@ -226,8 +226,10 @@
     // 8 tableau columns
     for (let i = 0; i < 8; i++) {
       let col = create("div", { className: "column", onclick: function (){
-        if (selectedCard != null && column.children.length == 0 ){
-          column.append(selectedCard);
+        console.log(col.children.length + "column.children.length")
+        if (selectedCard != null && col.children.length == 0 ){
+          console.log("swrat3ya3yhstershd6")
+          col.append(selectedCard);
         }
       } });
       tableau.append(col);
@@ -273,6 +275,7 @@
             && cardImg == cardImg.parentElement!.lastElementChild
             && ColorsMatch(selectedCard.id, cardImg.id)
             &&  !cardImg.parentElement?.className.includes("freecell")
+            &&  !cardImg.parentElement?.className.includes("foundation")
           ) 
             {
               let column = cardImg.parentElement as HTMLDivElement;
