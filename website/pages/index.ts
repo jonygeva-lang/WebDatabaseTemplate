@@ -5,7 +5,7 @@
 
     var itemInput = document.querySelector<HTMLInputElement>("#itemInput")!;
     var amountInput = document.querySelector<HTMLInputElement>("#amountInput")!;
-    var addButton = document.querySelector<HTMLButtonElement>("#addButton")!;
+    var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
     var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
     var gameDiv = get("div", "game");
     var title = get("div", "head-title");
@@ -294,3 +294,6 @@
       var column = tableauColumns[i % 8];
       column.append(cardImg);
     }
+    FindCard.onclick = async function () {
+       
+};

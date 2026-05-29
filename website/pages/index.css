@@ -29,6 +29,17 @@ body {
     color: red;
   }
 }
+.findcard {
+      background-color: #ff0000e1;   /* green */
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  font-family: Helvetica;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 10px;
+}
 .playbutton {
     background-color: #114b006c;   /* green */
   color: rgb(0, 0, 0);
@@ -98,3 +109,18 @@ body {
 .column .card:first-child {
   margin-top: 0;
 }
+/* .foundcard {
+    animation: highlight 2s;
+}
+
+@keyframes highlight {
+  0% {
+    outline: 3px solid rgb(15, 165, 42);
+    transform: scale(1.05);
+  }
+
+  100% {
+    outline: 1px solid transparent;
+    transform: scale(1);
+  }
+} */
