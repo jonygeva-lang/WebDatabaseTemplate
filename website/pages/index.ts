@@ -3,13 +3,10 @@
     import { send } from "clientUtilities";
     import { create, get } from "componentUtilities";
 
-    var itemInput = document.querySelector<HTMLInputElement>("#itemInput")!;
-    var amountInput = document.querySelector<HTMLInputElement>("#amountInput")!;
+
     var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
     var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
     var gameDiv = get("div", "game");
-    var title = get("div", "head-title");
-
     var topRow = create("div", { className: "top-row" });
     var freeCells = create("div", { className: "free-cells" });
     var foundations = create("div", { className: "foundations" });
@@ -18,6 +15,11 @@
 
     gameDiv.append(topRow, tableau);
     topRow.append(freeCells, foundations);
+
+    let timerId: ReturnType<typeof setInterval> = setInterval(() => {
+       // console.log("Tick!");
+    }, 1000);
+
 
     function getNum(Id: string) {
       var arr = Id.split("_");
@@ -164,57 +166,69 @@
       freeCells.append(slot);
       freeCellSlots.push(slot);
     }
-      var ArrHearts = 1
-      var ArrDiamonds = 1
-      var ArrSpade = 1
-      var ArrClubs = 1
+      var countHearts = 1
+      var countDiamonds = 1
+      var countSpade = 1
+      var countClubs = 1
     // 4 foundations
     for (let i = 0; i < 4; i++) {
       let slot = create("div", { className: "slot foundation", onclick: function (){
-        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "clubs" && parseInt(getNum(selectedCard.id)) == ArrClubs)
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "clubs" && parseInt(getNum(selectedCard.id)) == countClubs)
         {
           slot.append(selectedCard);
-          if(ArrClubs == 1) {
+          if(countClubs == 1) {
             selectedCard.style.marginTop = "0px";
           }
-          ArrClubs += 1
+          countClubs += 1
           countclick = 0;
           selectedCard = null;
+          if(countClubs == 14) {
+            CheckWin();
+          }
           return;
         }
-        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "spades" && parseInt(getNum(selectedCard.id)) == ArrSpade)
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "spades" && parseInt(getNum(selectedCard.id)) == countSpade)
         {
           slot.append(selectedCard);
-          if(ArrSpade == 1) {
+          if(countSpade == 1) {
             selectedCard.style.marginTop = "0px";
           }
-          ArrSpade += 1
+          countSpade += 1
           countclick = 0;
           selectedCard = null;
+          if(countSpade == 14) {
+            CheckWin();
+          }
           return;
         }
-        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "diamonds" && parseInt(getNum(selectedCard.id)) == ArrDiamonds)
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild === selectedCard && getType(selectedCard?.id!) == "diamonds" && parseInt(getNum(selectedCard.id)) == countDiamonds)
         {
           
           slot.append(selectedCard);
-          if(ArrDiamonds == 1) {
+          if(countDiamonds == 1) {
             selectedCard.style.marginTop = "0px";
           }
-          ArrDiamonds += 1
+          countDiamonds += 1
           countclick = 0;
           selectedCard = null;
+          if(countDiamonds == 14) {
+            CheckWin();
+          }
           return;
         }
-        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild == selectedCard && getType(selectedCard?.id!) == "hearts" && parseInt(getNum(selectedCard.id)) == ArrHearts)
+        if ( selectedCard != null && selectedCard.parentElement?.lastElementChild == selectedCard && getType(selectedCard?.id!) == "hearts" && parseInt(getNum(selectedCard.id)) == countHearts)
         {
           slot.append(selectedCard);
-          console.log(ArrHearts +  " -ArrHearts " + countclick + "-countclick"+ selectedCard.id)
-          if(ArrHearts == 1) {
+          console.log(countHearts +  " -ArrHearts " + countclick + "-countclick"+ selectedCard.id)
+          if(countHearts == 1) {
             selectedCard.style.marginTop = "0px";
           }
-          ArrHearts += 1
+          countHearts += 1
           countclick = 0;
           selectedCard = null;
+          if(countHearts == 14) {
+            CheckWin();
+          }
           return;
         }
       } });
@@ -262,6 +276,7 @@
             selectedCard.classList.add("selectedCard1");
             console.log(countclick + " ?" )
             countclick = 1
+            console.log(timerId)
           } 
           else if (countclick === 1){
           if (selectedCard == null)
@@ -297,3 +312,10 @@
     FindCard.onclick = async function () {
        
 };
+  function CheckWin() {
+    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14)
+    {
+
+    }
+    return;
+  }

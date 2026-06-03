@@ -4,11 +4,7 @@
   justify-content: center;
 }
 
-body {
-  background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
-  background-size: cover;
-  background-position: center;
-}
+
 .head-title{
   font-size: 48px;
   font-weight: bold;
@@ -39,6 +35,27 @@ body {
   border-radius: 6px;
   cursor: pointer;
   margin: 10px;
+}
+.signIn,
+.signUp {
+  background-color: #808080;
+  color: white;
+  font-size: 18px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.signIn {
+  position: fixed;
+  right: 10px;
+  top: 25px;
+}
+
+.signUp {
+  position: fixed;
+  right: 100px; 
+  top: 25px;
 }
 .playbutton {
     background-color: #114b006c;   /* green */
@@ -124,3 +141,25 @@ body {
     transform: scale(1);
   }
 } */
+
+header {
+    position: fixed; /* stays at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    background: white;
+    border-bottom: 2px solid black; /* line under header */
+
+          background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
+              background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body {
+    margin-top: 100px;
+    padding-top: 60px; /* prevents content from hiding behind header */
+      background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
+  background-size: cover;
+  background-position: center;
+}
