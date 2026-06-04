@@ -7,23 +7,31 @@
 </head>
 
 <body>
-                <tr>
-          <td>Username:</td>
-          <td><input id="usernameInput" /></td>
-        </tr>
-        <tr>
-          <td>Password:</td>
-          <td><input id="passwordInput" type="password"/></td>
-        </tr>
-        <tr>
-          <td>Confirm:</td>
-          <td><input id="confirmInput" type="password"/></td>
-        </tr>
-      </table>
-      <br />
-      <button id="submitButton">Submit</button>
-      <br />
-        <script type="module" src="signUp"></script>
+<div id="signupContainer">
+    <h1>Sign Up</h1>
+
+    <p id="loginText">
+        Already have an account?
+        <a href="http://192.168.1.105:5000/website/pages/signIn.html">Log in</a>
+    </p>
+
+    <div class="inputGroup">
+        <label>Username</label>
+        <input type="text">
+    </div>
+
+    <div class="inputGroup">
+        <label>Password</label>
+        <input type="password">
+    </div>
+
+    <div class="inputGroup">
+        <label>Confirm Password</label>
+        <input type="password">
+    </div>
+
+    <button id="signupButton">Sign Up</button>
+</div>
 </body>
 
 </html>

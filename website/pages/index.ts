@@ -6,18 +6,23 @@
 
     var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
     var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
+    var TimerDiv = document.querySelector<HTMLDivElement>("#timer")!;
     var gameDiv = get("div", "game");
     var topRow = create("div", { className: "top-row" });
     var freeCells = create("div", { className: "free-cells" });
     var foundations = create("div", { className: "foundations" });
 
     var tableau = create("div", { className: "tableau" });
-
     gameDiv.append(topRow, tableau);
     topRow.append(freeCells, foundations);
-
-    let timerId: ReturnType<typeof setInterval> = setInterval(() => {
-       // console.log("Tick!");
+    var MovesMade = 0;
+    let seconds = 0;
+    let timerId = setInterval(() => {
+      console.log(seconds)
+      seconds++;
+      let minutes = Math.floor(seconds / 60);
+      let remainingSeconds = seconds % 60;
+      TimerDiv.innerText =  minutes.toString() + ":" + remainingSeconds.toString().padStart(2, "0");
     }, 1000);
 
 
@@ -300,6 +305,7 @@
             // && selctedCard.parentElement 
           console.log(selectedCard.id)
           console.log(cardImg.id)
+
           countclick = 0
           }
           console.log("end", countclick);
@@ -315,7 +321,9 @@
   function CheckWin() {
     if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14)
     {
-
+      clearInterval(timerId);
+      console.log(MovesMade)
+      console.log(MovesMade)
     }
     return;
   }
