@@ -25,16 +25,9 @@ class Program
 
       try
       {
-        if (request.Name == "getItems")
+        if (request.Name == "SignUpSend");
         {
-          request.Respond(database.Items);
-        }
-        else if (request.Name == "addItem")
-        {
-          var (name, amount) = request.GetParams<(string, int)>();
-          var item = new Item(name, amount);
-          database.Items.Add(item);
-          database.SaveChanges();
+          
         }
       }
       catch (Exception exception)
@@ -49,15 +42,18 @@ class Program
 
 class Database() : DatabaseCore("database")
 {
-  public DbSet<Item> Items { get; set; } = default!;
+  public DbSet<User> Users { get; set; } = default!;
+
 }
 
-class Item(string name, double amount)
+class User(string token, string username, string password)
 {
   public int Id { get; set; } = default!;
-  public string Name { get; set; } = name;
-  public double Amount { get; set; } = amount;
+  [JsonIgnore] public string Token { get; set; } = token;
+  public string Username { get; set; } = username;
+  [JsonIgnore] public string Password { get; set; } = password;
 }
+
 
 class Card(string imageUrl)
 {

@@ -1,4 +1,3 @@
-    import type { Item } from "types";
 
     import { send } from "clientUtilities";
     import { create, get } from "componentUtilities";
@@ -6,7 +5,8 @@
 
     var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
     var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
-    var TimerDiv = document.querySelector<HTMLDivElement>("#timer")!;
+    var TimerDiv = document.querySelector<HTMLElement>("#timer")!;
+    var MovesSpan = document.querySelector<HTMLSpanElement>("#moves")!;
     var gameDiv = get("div", "game");
     var topRow = create("div", { className: "top-row" });
     var freeCells = create("div", { className: "free-cells" });
@@ -24,8 +24,6 @@
       let remainingSeconds = seconds % 60;
       TimerDiv.innerText =  minutes.toString() + ":" + remainingSeconds.toString().padStart(2, "0");
     }, 1000);
-
-
     function getNum(Id: string) {
       var arr = Id.split("_");
       return arr[0];
@@ -165,6 +163,8 @@
           return
         }
         console.log(slot.children.length + "free 2")
+        MovesMade++;
+        MovesSpan.innerText = "Moves made: " + MovesMade.toString()
         countclick = 0
         slot.append(selectedCard);
       } });
@@ -185,6 +185,8 @@
             selectedCard.style.marginTop = "0px";
           }
           countClubs += 1
+          MovesMade++;
+          MovesSpan.innerText = "Moves made: " + MovesMade.toString()
           countclick = 0;
           selectedCard = null;
           if(countClubs == 14) {
@@ -199,6 +201,8 @@
             selectedCard.style.marginTop = "0px";
           }
           countSpade += 1
+          MovesMade++;
+          MovesSpan.innerText = "Moves made: " + MovesMade.toString()
           countclick = 0;
           selectedCard = null;
           if(countSpade == 14) {
@@ -214,6 +218,8 @@
             selectedCard.style.marginTop = "0px";
           }
           countDiamonds += 1
+          MovesMade++;
+          MovesSpan.innerText = "Moves made: " + MovesMade.toString()
           countclick = 0;
           selectedCard = null;
           if(countDiamonds == 14) {
@@ -224,11 +230,12 @@
         if ( selectedCard != null && selectedCard.parentElement?.lastElementChild == selectedCard && getType(selectedCard?.id!) == "hearts" && parseInt(getNum(selectedCard.id)) == countHearts)
         {
           slot.append(selectedCard);
-          console.log(countHearts +  " -ArrHearts " + countclick + "-countclick"+ selectedCard.id)
           if(countHearts == 1) {
             selectedCard.style.marginTop = "0px";
           }
           countHearts += 1
+          MovesMade++;
+          MovesSpan.innerText = "Moves made: " + MovesMade.toString()
           countclick = 0;
           selectedCard = null;
           if(countHearts == 14) {
@@ -298,6 +305,8 @@
             &&  !cardImg.parentElement?.className.includes("foundation")
           ) 
             {
+              MovesMade++;
+              MovesSpan.innerText = "Moves made:" + MovesMade.toString()
               let column = cardImg.parentElement as HTMLDivElement;
               selectedCard.classList.remove("selectedCard1");
               column.append(selectedCard);
@@ -305,7 +314,6 @@
             // && selctedCard.parentElement 
           console.log(selectedCard.id)
           console.log(cardImg.id)
-
           countclick = 0
           }
           console.log("end", countclick);
