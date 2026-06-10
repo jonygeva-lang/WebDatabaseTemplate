@@ -36,8 +36,10 @@
   cursor: pointer;
   margin: 10px;
 }
-.signIn,
-.signUp {
+#logOut{
+  position: fixed;
+  right: 10px;
+  top: 35px;
   background-color: #808080;
   color: white;
   font-size: 18px;
@@ -46,19 +48,15 @@
   border-radius: 6px;
   cursor: pointer;
 }
-.signIn {
-  position: fixed;
-  right: 10px;
-  top: 25px;
-}
 
-.signUp {
+#helloDiv {
   position: fixed;
-  right: 100px; 
+  right: 200px; 
   top: 25px;
+
 }
 .playbutton {
-    background-color: #114b006c;   /* green */
+    background-color: #114b006c; 
   color: rgb(0, 0, 0);
   font-size: 24px;
   font-family: Helvetica;

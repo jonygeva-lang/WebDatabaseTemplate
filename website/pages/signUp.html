@@ -12,26 +12,28 @@
 
     <p id="loginText">
         Already have an account?
-        <a href="C:\Users\97254\WebDatabaseTemplate\website\pages\signIn.html">Log in</a>
+        <a href="signIn.html">Log in</a>
     </p>
 
-    <div class="inputGroup" id="usernameInput1">
+    <div class="inputGroup" >
         <label>Username</label>
-        <input type="text">
+        <input type="text" id="usernameInput1" placeholder="Username">
+    
     </div>
 
-    <div class="inputGroup" id="passwordInput">
+    <div class="inputGroup" >
         <label>Password</label>
-        <input type="password">
+        <input type="password" id="passwordInput" placeholder="Password">
     </div>
 
-    <div class="inputGroup" id="usernameInput2">
+    <div class="inputGroup" >
         <label>Confirm Password</label>
-        <input type="password">
+        <input type="password" id="usernameInput2" placeholder="Confirm Password">
     </div>
-
+    <div id="EDiv">  </div>
     <button id="signupButton">Sign Up</button>
 </div>
+  <script type="module" src="signUp.js"></script>
 </body>
 
 </html>

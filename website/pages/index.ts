@@ -1,16 +1,27 @@
 
     import { send } from "clientUtilities";
     import { create, get } from "componentUtilities";
+import { User } from "types";
 
 
     var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
     var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
     var TimerDiv = document.querySelector<HTMLElement>("#timer")!;
     var MovesSpan = document.querySelector<HTMLSpanElement>("#moves")!;
+    var logoutBtn = get("button", "logOut");
+    var HelloDiv = get("div", "helloDiv")
     var gameDiv = get("div", "game");
     var topRow = create("div", { className: "top-row" });
     var freeCells = create("div", { className: "free-cells" });
     var foundations = create("div", { className: "foundations" });
+    var token = localStorage.getItem("token");
+
+
+    const user = await send<User | null>("GetUser", token);
+
+    const currentUser = user?.username;
+
+    HelloDiv.innerText = "welcome, " + currentUser;
 
     var tableau = create("div", { className: "tableau" });
     gameDiv.append(topRow, tableau);
@@ -18,12 +29,18 @@
     var MovesMade = 0;
     let seconds = 0;
     let timerId = setInterval(() => {
-      console.log(seconds)
       seconds++;
       let minutes = Math.floor(seconds / 60);
       let remainingSeconds = seconds % 60;
       TimerDiv.innerText =  minutes.toString() + ":" + remainingSeconds.toString().padStart(2, "0");
     }, 1000);
+
+    logoutBtn.onclick = async function()
+    {
+      localStorage.removeItem("token");
+      location.href = ("signUp.html")
+    }
+
     function getNum(Id: string) {
       var arr = Id.split("_");
       return arr[0];
@@ -39,7 +56,7 @@
       if (getType(id_first) == "clubs" && (getType(id_second)== "diamonds" || getType(id_second)== "hearts" )) {return true}
       if (getType(id_first) == "spades" && (getType(id_second)== "diamonds" || getType(id_second)== "hearts" )) {return true}
     }
-
+    
     var cardIds = [
       "1_hearts",
       "2_hearts",

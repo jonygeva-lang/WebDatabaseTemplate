@@ -1,4 +1,9 @@
 ﻿using System;
+using System.ComponentModel.Design;
+using System.Data.Common;
+using System.Linq;
+using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Project.DatabaseUtilities;
 using Project.LoggingUtilities;
@@ -14,8 +19,8 @@ class Program
     var database = new Database();
 
     Console.WriteLine("The server is running");
-    Console.WriteLine($"Local:   http://localhost:{port}/website/pages/index.html");
-    Console.WriteLine($"Network: http://{Network.GetLocalNetworkIPAddress()}:{port}/website/pages/index.html");
+    Console.WriteLine($"Local:   http://localhost:{port}/website/pages/signUp.html");
+    Console.WriteLine($"Network: http://{Network.GetLocalNetworkIPAddress()}:{port}/website/pages/signUp.html");
 
     while (true)
     {
@@ -25,9 +30,38 @@ class Program
 
       try
       {
-        if (request.Name == "SignUpSend");
         {
-          
+          if (request.Name == "GetUser")
+          {
+          var token = request.GetParams<string>();
+          var user = database.Users.FirstOrDefault(u => u.Token == token);
+          request.Respond(user);
+          }
+        }
+        if (request.Name == "SignUpSend")
+        {
+          var (username, password) = request.GetParams<(string, string)>();
+
+          if (database.Users.Any(u => u.Username == username))
+          {
+            request.Respond<string?>(null);
+            continue;
+          }
+
+          var token = Guid.NewGuid().ToString();
+          var user = new User(token, username, password);
+          database.Users.Add(user);
+          database.SaveChanges();
+
+          request.Respond(token);
+        }
+        {
+          if(request.Name == "SignIn")
+          {
+          var (username, password) = request.GetParams<(string, string)>();
+          var user = database.Users.FirstOrDefault(u =>u.Username == username && u.Password == password);
+          request.Respond(user?.Token);
+          }
         }
       }
       catch (Exception exception)
@@ -43,6 +77,7 @@ class Program
 class Database() : DatabaseCore("database")
 {
   public DbSet<User> Users { get; set; } = default!;
+  // public DbSet<WinGame> WinGames { get; set; } = default!;
 
 }
 
@@ -61,3 +96,14 @@ class Card(string imageUrl)
 
   public string ImageUrl { get; set; } = imageUrl;
 }
+
+// class WinGame(string token, User user, int time, int moves)
+// {
+//   public int Id { get; set; } = default!;
+//   [JsonIgnore] public string Token { get; set; } = token;
+
+//   public User User { get; set; } = user;
+
+//   public int Time { get; set; } = time;
+//   public int Moves { get; set; } = moves;
+// }
