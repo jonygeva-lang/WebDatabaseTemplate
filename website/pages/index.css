@@ -55,17 +55,7 @@
   top: 25px;
 
 }
-.playbutton {
-    background-color: #114b006c; 
-  color: rgb(0, 0, 0);
-  font-size: 24px;
-  font-family: Helvetica;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  margin: 10px;
-}
+
 .top-row {
   display: flex;
   justify-content: space-between;
@@ -181,3 +171,32 @@ body {
   padding: 5px 10px;
   border-radius: 6px;
 }
+
+/* .popup {
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 9999;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.popup-content h1 {
+    color: red;
+} */

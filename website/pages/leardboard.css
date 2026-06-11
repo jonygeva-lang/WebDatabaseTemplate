@@ -1,0 +1,75 @@
+.leaderboard-container {
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.leaderboard {
+    width: 40%;
+    max-width: 1000px;
+
+    background-color: rgba(0, 0, 0, 0.75);
+
+    color: white;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+
+    font-family: Helvetica;
+    font-size: 14px;
+
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.leaderboard th {
+    background-color: #ff0000e1;
+    color: black;
+
+    padding: 4px;
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.leaderboard td {
+    padding: 14px;
+    text-align: center;
+
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.leaderboard tr:nth-child(even) {
+    background-color: rgba(255,255,255,0.05);
+}
+
+
+.leaderboard tr:first-child td {
+    color: gold;
+    font-weight: bold;
+}
+
+.leaderboard tr:nth-child(2) td {
+    color: silver;
+    font-weight: bold;
+}
+
+.leaderboard tr:nth-child(3) td {
+    color: #cd7f32;
+    font-weight: bold;
+}
+.playbutton {
+    background-color: #114b006c; 
+  color: rgb(0, 0, 0);
+  font-size: 24px;
+  font-family: Helvetica;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+body {
+    background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
+  background-size: cover;
+  background-position: center;
+}

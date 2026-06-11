@@ -30,15 +30,19 @@ class Program
 
       try
       {
-        {
+          // if (request.Name == "Win")
+          // {
+          //   var (token, userId, time, moves) = request.GetParams<(string, int, int, int)>();
+          //   WinGame win = new (token, userId, time, moves);
+          //   database.WinGames.Add(win);
+          // }
           if (request.Name == "GetUser")
           {
           var token = request.GetParams<string>();
           var user = database.Users.FirstOrDefault(u => u.Token == token);
           request.Respond(user);
           }
-        }
-        if (request.Name == "SignUpSend")
+        if (request.Name == "SignUp")
         {
           var (username, password) = request.GetParams<(string, string)>();
 
@@ -89,21 +93,13 @@ class User(string token, string username, string password)
   [JsonIgnore] public string Password { get; set; } = password;
 }
 
-
-class Card(string imageUrl)
-{
-  public int Id { get; set; } = default!;
-
-  public string ImageUrl { get; set; } = imageUrl;
-}
-
-// class WinGame(string token, User user, int time, int moves)
+// class WinGame(string token, int userId, int time, int moves)
 // {
 //   public int Id { get; set; } = default!;
 //   [JsonIgnore] public string Token { get; set; } = token;
-
-//   public User User { get; set; } = user;
-
 //   public int Time { get; set; } = time;
 //   public int Moves { get; set; } = moves;
+//   public int UserId {get;set;} = userId;
+  
+//   public User User { get; set; } = default!;
 // }

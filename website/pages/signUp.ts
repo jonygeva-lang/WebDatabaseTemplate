@@ -17,7 +17,7 @@ SignUpButton.onclick = async function () {
         return;
     }
     console.log(usernameInput.value);
-    var token = await send<string | null>("SignUpSend", usernameInput.value, passwordInput.value);
+    var token = await send<string | null>("SignUp", usernameInput.value, passwordInput.value);
     if (token == null) {
         errorDiv.innerText = "There is a user with this user name already.";
         return;

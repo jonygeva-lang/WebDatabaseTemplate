@@ -38,7 +38,7 @@ import { User } from "types";
     logoutBtn.onclick = async function()
     {
       localStorage.removeItem("token");
-      location.href = ("signUp.html")
+      location.href = ("signUp.html");
     }
 
     function getNum(Id: string) {
@@ -184,6 +184,7 @@ import { User } from "types";
         MovesSpan.innerText = "Moves made: " + MovesMade.toString()
         countclick = 0
         slot.append(selectedCard);
+        CheckWin()
       } });
       freeCells.append(slot);
       freeCellSlots.push(slot);
@@ -343,12 +344,14 @@ import { User } from "types";
     FindCard.onclick = async function () {
        
 };
-  function CheckWin() {
-    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14)
+  async function CheckWin() {
+    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null || selectedCard!.id == "3_hearts" && user != null)
     {
+      var time = seconds
       clearInterval(timerId);
-      console.log(MovesMade)
-      console.log(MovesMade)
+      console.log(time + "sdfs " + MovesMade)
+      token = await send<string | null>("Win", token, user.id, time, MovesMade,);
+      // location.href = ("signUp.html");
     }
     return;
   }
