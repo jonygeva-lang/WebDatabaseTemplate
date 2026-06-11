@@ -5,7 +5,6 @@ import { User } from "types";
 
 
     var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
-    var itemsUl = document.querySelector<HTMLUListElement>("#itemsUl")!;''
     var TimerDiv = document.querySelector<HTMLElement>("#timer")!;
     var MovesSpan = document.querySelector<HTMLSpanElement>("#moves")!;
     var logoutBtn = get("button", "logOut");
@@ -38,7 +37,7 @@ import { User } from "types";
     logoutBtn.onclick = async function()
     {
       localStorage.removeItem("token");
-      location.href = ("signUp.html");
+      location.href = ("leardboard.html");
     }
 
     function getNum(Id: string) {
@@ -179,7 +178,6 @@ import { User } from "types";
         {
           return
         }
-        console.log(slot.children.length + "free 2")
         MovesMade++;
         MovesSpan.innerText = "Moves made: " + MovesMade.toString()
         countclick = 0
@@ -342,15 +340,15 @@ import { User } from "types";
       column.append(cardImg);
     }
     FindCard.onclick = async function () {
-       
+       // || selectedCard!.id == "3_hearts" && user != null
 };
   async function CheckWin() {
-    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null || selectedCard!.id == "3_hearts" && user != null)
+    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null )
     {
       var time = seconds
       clearInterval(timerId);
       console.log(time + "sdfs " + MovesMade)
-      token = await send<string | null>("Win", token, user.id, time, MovesMade,);
+      token = await send<string | null>("Win", [user.id, time, MovesMade]);
       // location.href = ("signUp.html");
     }
     return;

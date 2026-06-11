@@ -19,8 +19,8 @@ class Program
     var database = new Database();
 
     Console.WriteLine("The server is running");
-    Console.WriteLine($"Local:   http://localhost:{port}/website/pages/signUp.html");
-    Console.WriteLine($"Network: http://{Network.GetLocalNetworkIPAddress()}:{port}/website/pages/signUp.html");
+    Console.WriteLine($"Local:   http://localhost:{port}/website/pages/leardboard.html");
+    Console.WriteLine($"Network: http://{Network.GetLocalNetworkIPAddress()}:{port}/website/pages/leardboard.html");
 
     while (true)
     {
@@ -30,12 +30,29 @@ class Program
 
       try
       {
-          // if (request.Name == "Win")
-          // {
-          //   var (token, userId, time, moves) = request.GetParams<(string, int, int, int)>();
-          //   WinGame win = new (token, userId, time, moves);
-          //   database.WinGames.Add(win);
-          // }
+          if (request.Name == "GetLeaderboard")
+          {
+              var leaderboard = database.WinGames
+                  .Include(w => w.User)
+                  .OrderBy(w => w.Time)
+                  .ThenBy(w => w.Moves)
+                  .Take(10)
+                  .ToList();
+
+              request.Respond(leaderboard);
+          }
+          if (request.Name == "GetLeardboardOwn")
+        {
+          
+        }
+          if (request.Name == "Win")
+          {
+            var (userId, time, moves) = request.GetParams<(int, int, int)>();
+            WinGame win = new ( userId, time, moves);
+            database.WinGames.Add(win);
+            database.SaveChanges();
+            request.Respond(true);
+          }
           if (request.Name == "GetUser")
           {
           var token = request.GetParams<string>();
@@ -81,7 +98,7 @@ class Program
 class Database() : DatabaseCore("database")
 {
   public DbSet<User> Users { get; set; } = default!;
-  // public DbSet<WinGame> WinGames { get; set; } = default!;
+  public DbSet<WinGame> WinGames { get; set; } = default!;
 
 }
 
@@ -93,13 +110,12 @@ class User(string token, string username, string password)
   [JsonIgnore] public string Password { get; set; } = password;
 }
 
-// class WinGame(string token, int userId, int time, int moves)
-// {
-//   public int Id { get; set; } = default!;
-//   [JsonIgnore] public string Token { get; set; } = token;
-//   public int Time { get; set; } = time;
-//   public int Moves { get; set; } = moves;
-//   public int UserId {get;set;} = userId;
+class WinGame(int userId, int time, int moves)
+{
+  public int Id { get; set; } = default!;
+  public int Time { get; set; } = time;
+  public int Moves { get; set; } = moves;
+  public int UserId {get;set;} = userId;
   
-//   public User User { get; set; } = default!;
-// }
+  public User User { get; set; } = default!;
+}
