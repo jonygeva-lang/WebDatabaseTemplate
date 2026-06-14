@@ -30,17 +30,16 @@ class Program
 
       try
       {
-          if (request.Name == "GetLeaderboard")
-          {
-              var leaderboard = database.WinGames
-                  .Include(w => w.User)
-                  .OrderBy(w => w.Time)
-                  .ThenBy(w => w.Moves)
-                  .Take(10)
-                  .ToList();
-
-              request.Respond(leaderboard);
-          }
+        if (request.Name == "GetLeaderboard")
+        {
+            var leaderboard = database.WinGames
+              .Include(w => w.User)
+              .OrderByDescending(w =>
+                  100000.0 / (w.Time + w.Moves * 5))
+              .Take(10)
+              .ToList();
+            request.Respond(leaderboard);
+        }
           if (request.Name == "GetLeardboardOwn")
         {
           
