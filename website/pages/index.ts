@@ -1,7 +1,9 @@
 
     import { send } from "clientUtilities";
     import { create, get } from "componentUtilities";
-import { User } from "types";
+    import { User } from "types";
+    import { secondtotime } from "./funcs";
+
 
 
     var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;

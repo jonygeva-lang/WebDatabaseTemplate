@@ -32,11 +32,12 @@ class Program
       {
         if (request.Name == "GetLeaderboard")
         {
-            var leaderboard = database.WinGames
-              .Include(w => w.User)
-              .OrderByDescending(w =>
-                  100000.0 / (w.Time + w.Moves * 5))
-              .Take(10)
+          var token = request.GetParams<string>();
+          var leaderboard = database.WinGames
+            .Include(w => w.User)
+            .OrderByDescending(w =>
+                100000.0 / (w.Time + w.Moves * 5))
+            .Take(10)
               .ToList();
             request.Respond(leaderboard);
         }

@@ -22,13 +22,14 @@ if (user != null)
 for (let i = 0; i < leaderboard.length; i++)
 {
     const player = leaderboard[i];
-
+    console.log(player);
+    console.log(player.username + "usernane");
     body.append(
         create("tr", {},
             create("td", { innerText: (i + 1).toString() }),
-            create("td", { innerText: player.username }),
-            // create("td", { innerText: player.moves.toString() }),
-            create("td", { innerText: (100000.0 / (player.time + player.moves * 5)) })
+            create("td", { innerText: player.username.toString() }),
+            create("td", { innerText: Math.floor(100000.0 / (player.time + player.moves * 5)).toString() }),
+            create("td", { innerText: player.moves.toString() }),
             create("td", { innerText: secondtotime(player.time).toString() }),
         )
     );

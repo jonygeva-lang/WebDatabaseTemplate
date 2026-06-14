@@ -15,4 +15,8 @@
     ".codex": true,
   },
   "js/ts.preferences.importModuleSpecifier": "non-relative",
+  "github.copilot.nextEditSuggestions.fixes": false,
+  "github.copilot.nextEditSuggestions.extendedRange": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.nextEditSuggestions.allowWhitespaceOnlyChanges": false,
 }

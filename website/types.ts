@@ -10,3 +10,11 @@ export type WinGame = {
         username: string;
     };
 };
+
+export type LeaderboardEntry =
+{
+    username: User;
+    time: number;
+    moves: number;
+    score: number;
+}
