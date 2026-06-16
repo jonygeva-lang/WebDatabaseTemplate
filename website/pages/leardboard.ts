@@ -16,19 +16,17 @@ var leaderboard = await send<LeaderboardEntry[]>("GetLeaderboard", token);
 if (user != null)
 {
     HelloDiv.innerText = "welcome, " + currentUser;
+    
 }
-
-
+console.log(leaderboard)
 for (let i = 0; i < leaderboard.length; i++)
 {
     const player = leaderboard[i];
-    console.log(player);
-    console.log(player.username + "usernane");
     body.append(
         create("tr", {},
             create("td", { innerText: (i + 1).toString() }),
             create("td", { innerText: player.username.toString() }),
-            create("td", { innerText: Math.floor(100000.0 / (player.time + player.moves * 5)).toString() }),
+            create("td", { innerText: Math.floor(3600-player.time +10*(200-player.moves)).toString() }),
             create("td", { innerText: player.moves.toString() }),
             create("td", { innerText: secondtotime(player.time).toString() }),
         )

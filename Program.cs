@@ -34,21 +34,17 @@ class Program
         {
           var token = request.GetParams<string>();
           var leaderboard = database.WinGames
-            .Include(w => w.User)
             .OrderByDescending(w =>
-                100000.0 / (w.Time + w.Moves * 5))
+                3600-w.Time +10*(200-w.Moves))
             .Take(10)
-              .ToList();
+            .ToList();
             request.Respond(leaderboard);
-        }
-          if (request.Name == "GetLeardboardOwn")
-        {
-          
         }
           if (request.Name == "Win")
           {
             var (userId, time, moves) = request.GetParams<(int, int, int)>();
-            WinGame win = new ( userId, time, moves);
+            var user = database.Users.First(u => u.Id == userId);
+            WinGame win = new ( userId, time, moves, user.Username);
             database.WinGames.Add(win);
             database.SaveChanges();
             request.Respond(true);
@@ -110,12 +106,14 @@ class User(string token, string username, string password)
   [JsonIgnore] public string Password { get; set; } = password;
 }
 
-class WinGame(int userId, int time, int moves)
+class WinGame(int userId, int time, int moves, string username)
 {
   public int Id { get; set; } = default!;
   public int Time { get; set; } = time;
   public int Moves { get; set; } = moves;
   public int UserId {get;set;} = userId;
+
+  public string Username { get; set; } = username;
   
   public User User { get; set; } = default!;
 }

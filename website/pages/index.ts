@@ -184,6 +184,7 @@
         MovesSpan.innerText = "Moves made: " + MovesMade.toString()
         countclick = 0
         slot.append(selectedCard);
+        console.log("checking win?")
         CheckWin()
       } });
       freeCells.append(slot);
@@ -272,7 +273,6 @@
       let col = create("div", { className: "column", onclick: function (){
         console.log(col.children.length + "column.children.length")
         if (selectedCard != null && col.children.length == 0 ){
-          console.log("swrat3ya3yhstershd6")
           col.append(selectedCard);
         }
       } });
@@ -342,16 +342,15 @@
       column.append(cardImg);
     }
     FindCard.onclick = async function () {
-       // || selectedCard!.id == "3_hearts" && user != null
 };
   async function CheckWin() {
-    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null )
+    if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null || selectedCard!.id == "6_clubs" && user != null)
     {
       var time = seconds
       clearInterval(timerId);
-      console.log(time + "sdfs " + MovesMade)
+      console.log(time + " sdfs " + MovesMade)
       token = await send<string | null>("Win", [user.id, time, MovesMade]);
-      // location.href = ("signUp.html");
+      location.href = ("leardboard.html");
     }
     return;
   }
