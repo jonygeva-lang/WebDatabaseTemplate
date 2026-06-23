@@ -6,7 +6,7 @@
 
 
 
-    var FindCard = document.querySelector<HTMLButtonElement>("#findcard")!;
+    var ExitGame = document.querySelector<HTMLButtonElement>("#findcard")!;
     var TimerDiv = document.querySelector<HTMLElement>("#timer")!;
     var MovesSpan = document.querySelector<HTMLSpanElement>("#moves")!;
     var logoutBtn = get("button", "logOut");
@@ -16,6 +16,7 @@
     var freeCells = create("div", { className: "free-cells" });
     var foundations = create("div", { className: "foundations" });
     var token = localStorage.getItem("token");
+    
 
 
     const user = await send<User | null>("GetUser", token);
@@ -341,7 +342,8 @@
       var column = tableauColumns[i % 8];
       column.append(cardImg);
     }
-    FindCard.onclick = async function () {
+ExitGame.onclick = async function () {
+      location.href = ("leardboard.html");
 };
   async function CheckWin() {
     if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null || selectedCard!.id == "6_clubs" && user != null)

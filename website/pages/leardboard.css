@@ -1,4 +1,4 @@
-#signUp {
+#signUp  {
   position: fixed;
   right: 100px;
   top: 35px;
@@ -10,8 +10,19 @@
   border-radius: 6px;
   cursor: pointer;
 }
-
-#signIn{
+#logout{
+  position: fixed;
+  right: 10px;
+  top: 35px;
+  background-color: #808080;
+  color: white;
+  font-size: 18px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#signIn {
   position: fixed;
   right: 10px;
   top: 35px;

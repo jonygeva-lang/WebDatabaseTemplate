@@ -11,13 +11,12 @@
   <h1>
     <div class="head-title">
       Leaderboard
-      <button id="BackGame" class="playbutton">
-        Back to Game
-      </button>
+      <button id="BackGame" class="playbutton"> Start a Game </button>
       <button onclick="location.href='rules.html'" class="playbutton"> how to play </button>
-    <span id="hello"> </span>
+      <span id="hello"> </span>
       <button id="signUp" onclick="location.href='signUp.html'"> SignUp </button>
       <button id="signIn" onclick="location.href='SignIn.html'"> SignIn </button>
+      <button id="logout"></button>
     </div>
   </h1>
 </header>
@@ -39,22 +38,22 @@
 
   </table>
 </div>
-<div class="leaderboard-container">
-  <table class="leaderboard">
+<h2 id="UserHead"></h2>
+
+<table class="leaderboard">
     <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Player</th>
-        <th>Moves</th>
-        <th>Time</th>
-      </tr>
+        <tr>
+            <th>Rank</th>
+            <th>Score</th>
+            <th>Moves</th>
+            <th>Time</th>
+        </tr>
     </thead>
 
-<tbody id="Persnal-leaderboardBody">
-</tbody>
+    <tbody id="ownLeaderboardBody">
+    </tbody>
+</table>
 
-  </table>
-</div>
 <script type="module" src="leardboard.js"></script>
 </body>
 

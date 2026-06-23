@@ -1,16 +1,66 @@
-#containerDiv {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+body {
+  margin: 0;
+  padding-top: 160px; /* מונע מהתוכן להתחבא תחת הכותרת */
+  background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
+  background-size: cover;
+  background-position: center;
+  font-family: Helvetica, sans-serif;
+  text-align: center; /* ממקם את הכל באמצע */
 }
 
-h1 {
-  font-size: 100px;
-  margin-bottom: 0px;
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-bottom: 2px solid black;
+  background-image: url(https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQw1vjzfBIiap0bZvxY5Tv4LTXsAq8L7ajIE1ZcPouES-kIe7obwVAddsb8fxWI);
+  background-size: cover;
 }
 
-h2 {
-  font-size: 50px;
-  margin-top: 0px;
+.head-title {
+  font-size: 48px;
+  margin: 10px 0;
+  animation: colorChange 9s infinite;
+}
+
+/* האנימציה המקורית שלך */
+@keyframes colorChange {
+  0% { color: red; }
+  33% { color: black; }
+  66% { color: white; }
+  100% { color: red; }
+}
+
+/* קופסת השגיאה השחורה */
+.error-box {
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  margin-top: 40px;
+}
+
+.error-box h1 {
+  font-size: 90px;
+  color: #ff0000e1;
+  margin: 0;
+}
+
+.error-box h2 {
+  font-size: 24px;
+  color: gold;
+  margin: 10px 0 20px 0;
+}
+button {
+  background-color: #ff0000e1;
+  color: black;
+  font-size: 20px;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 

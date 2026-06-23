@@ -34,27 +34,37 @@ class Program
         {
           var token = request.GetParams<string>();
           var leaderboard = database.WinGames
-            .OrderByDescending(w =>
-                3600-w.Time +10*(200-w.Moves))
+            .OrderByDescending(w => 3600-w.Time +10*(200-w.Moves))
+          .Take(10)
+          .ToList();
+          request.Respond(leaderboard);
+        }
+        if (request.Name == "GetOwnLeaderBoard")
+        {
+            var token = request.GetParams<string>();
+            var user = database.Users.FirstOrDefault(u => u.Token == token);
+            var leaderboard = database.WinGames
+            .Where(w => w.UserId == user!.Id)
+            .OrderByDescending(w => 3600 - w.Time + 10 * (200 - w.Moves))
             .Take(10)
             .ToList();
             request.Respond(leaderboard);
         }
-          if (request.Name == "Win")
-          {
-            var (userId, time, moves) = request.GetParams<(int, int, int)>();
-            var user = database.Users.First(u => u.Id == userId);
-            WinGame win = new ( userId, time, moves, user.Username);
-            database.WinGames.Add(win);
-            database.SaveChanges();
-            request.Respond(true);
-          }
-          if (request.Name == "GetUser")
-          {
-          var token = request.GetParams<string>();
-          var user = database.Users.FirstOrDefault(u => u.Token == token);
-          request.Respond(user);
-          }
+        if (request.Name == "Win")
+        {
+          var (userId, time, moves) = request.GetParams<(int, int, int)>();
+          var user = database.Users.First(u => u.Id == userId);
+          WinGame win = new ( userId, time, moves, user.Username);
+          database.WinGames.Add(win);
+          database.SaveChanges();
+          request.Respond(true);
+        }
+        if (request.Name == "GetUser")
+        {
+        var token = request.GetParams<string>();
+        var user = database.Users.FirstOrDefault(u => u.Token == token);
+        request.Respond(user);
+        }
         if (request.Name == "SignUp")
         {
           var (username, password) = request.GetParams<(string, string)>();
