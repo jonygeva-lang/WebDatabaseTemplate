@@ -13,9 +13,11 @@ var token = localStorage.getItem("token");
 console.log("fg")
 submitButton.onclick = async function () {
   var token = await send<string | null>("SignIn", usernameInput.value, passwordInput.value);
-  console.log(token)
   if (token == null) {
     errorDiv.innerText = "Invalid username or password.";
+    errorDiv.style.color = "white";
+    usernameInput.value = ""
+    passwordInput.value = ""
     return;
   }
 
