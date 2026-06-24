@@ -5,7 +5,7 @@
     import { secondtotime } from "./funcs";
 
 
-
+    //variables
     var ExitGame = document.querySelector<HTMLButtonElement>("#findcard")!;
     var TimerDiv = document.querySelector<HTMLElement>("#timer")!;
     var MovesSpan = document.querySelector<HTMLSpanElement>("#moves")!;
@@ -18,7 +18,7 @@
     var token = localStorage.getItem("token");
     
 
-
+    // welcome user
     const user = await send<User | null>("GetUser", token);
 
     const currentUser = user?.username;
@@ -28,6 +28,7 @@
     var tableau = create("div", { className: "tableau" });
     gameDiv.append(topRow, tableau);
     topRow.append(freeCells, foundations);
+    
     var MovesMade = 0;
     let seconds = 0;
     let timerId = setInterval(() => {
@@ -36,21 +37,23 @@
       let remainingSeconds = seconds % 60;
       TimerDiv.innerText =  minutes.toString() + ":" + remainingSeconds.toString().padStart(2, "0");
     }, 1000);
-
+// Log out user and return to leaderboard
     logoutBtn.onclick = async function()
     {
       localStorage.removeItem("token");
       location.href = ("leardboard.html");
     }
-
+// Get card number from id
     function getNum(Id: string) {
       var arr = Id.split("_");
       return arr[0];
     }
+// Get card suit from id
     function getType(Id: string) {
       var arr = Id.split("_");
       return arr[1];
     }
+// Check if two cards are opposite colors
     function ColorsMatch(id_first: string, id_second: string)
     {
       if (getType(id_first) == "hearts" && (getType(id_second)== "clubs" || getType(id_second)== "spades" )) {return true}
@@ -280,6 +283,7 @@
       tableau.append(col);
       tableauColumns.push(col);
     }
+  // Randomly shuffle an array
     function shuffle(array: number[]) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -342,9 +346,11 @@
       var column = tableauColumns[i % 8];
       column.append(cardImg);
     }
+  // Return to leaderboard page
 ExitGame.onclick = async function () {
       location.href = ("leardboard.html");
 };
+// Check if player has won the game
   async function CheckWin() {
     if(countClubs == 14 && countDiamonds == 14 && countHearts == 14 && countSpade ==14 && user != null || selectedCard!.id == "6_clubs" && user != null)
     {
